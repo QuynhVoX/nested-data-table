@@ -1,0 +1,49 @@
+<section class="row">
+  <section class="col-sm-12">
+    <mat-card class="no-title-padding">
+      <mat-card-title *ngIf="header">{{header.header}} &nbsp;
+        <section class="pull-right">
+          <button mat-icon-button (click)="searchToggle = !searchToggle;" [ngClass]="{'toggled': searchToggle}" style="top:-5px">
+            <span matTooltip="Toggle search" matTooltipShowDelay="300"><i class="fa fa-lg fa-search"></i></span>
+          </button>
+          <button *ngIf="header.export" mat-icon-button (click)="export()" style="top:-5px">
+            <span matTooltip="Export dataset" matTooltipShowDelay="300"><i class="fa fa-lg fa-file-excel"></i></span>
+          </button>
+          <button *ngIf="header.icon" mat-icon-button (click)="headerClick($event)" style="top:-5px"> 
+            <span matTooltip="{{header.iconToolTip}}" matTooltipShowDelay="300"><i class="{{header.icon}}"></i></span>
+          </button>
+
+        </section>
+      </mat-card-title>
+      <mat-card-content>
+        <mat-form-field  [hidden]="!searchToggle">
+          <input matInput type="search" #searchBox>
+          <mat-placeholder>Search here...</mat-placeholder> <button mat-button *ngIf="searchBox.value" matSuffix
+            mat-icon-button (click)="searchBox.value=null; searchTextChanged(searchBox.value);">
+            <i class="fa fa-times" style="margin-top: -1px; margin-left: 1px"></i>
+          </button>
+        </mat-form-field>
+      
+        <hr *ngIf="searchToggle" style="margin-bottom: 0" />
+        
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+            <mat-header-cell [style.flex] = "column.styleFlex? column.styleFlex: ''" *matHeaderCellDef mat-sort-header>{{column.header}}</mat-header-cell>
+            <mat-cell [style.flex] = "column.styleFlex? column.styleFlex: ''" [style.text-align] = "(column.dataType === 'number' || column.dataType === 'money')? 'right': ''" *matCellDef="let element">
+              <span *ngIf="column.dataType !== 'icon'">{{(column.dataType === 'date')? (element[column.columnDef] | date: 'dd-MMM-yyyy'): (column.dataType === 'money')? (element[column.columnDef] | number:'.2'): element[column.columnDef]}}</span>
+              <button *ngIf="column.dataType ==='icon'"  mat-icon-button  style="top:-10px" [color]="column.color" (click)="rowClick(element)" >
+                  <mat-icon [class]="column.class"></mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+      
+          <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        
+        <mat-paginator [hidden] = "data.length < 11" #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true"></mat-paginator>
+      
+      </mat-card-content>
+    </mat-card>
+  </section>
+</section>

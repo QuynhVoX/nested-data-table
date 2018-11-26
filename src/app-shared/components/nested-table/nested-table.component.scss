@@ -1,0 +1,32 @@
+::ng-deep .search-in-table .mat-form-field-infix {
+  //padding: 0.001em 0 !important;
+  border-top: 0.01em !important;
+}
+[hidden]  { display: none; }
+.no-padding {
+    padding: 4px !important;
+  }
+  mat-icon {
+    // color: #009cde;
+    &.fa-plus-circle {
+      color: green;
+    }
+    &.fa-times {
+      color: red;
+    }
+  }
+  mat-header-row{
+    min-height: 20px;
+  }
+  .detail-table {display: flex;flex-direction: column;display: block;margin: 10px;width:98%;}
+  .expand-icon {color: rgba(0,0,0,.44);font-size: 12px; margin-right: 5px; cursor: pointer;}
+  //.col-value:first-child span{margin-left: 55px;} 
+  mat-form-field {padding: 10px 10px 0 10px;width: calc(50% - 20px);}
+  .mat-header-row, .mat-row {
+    padding: 5px 0px!important;
+    min-height: 0px;
+  }
+  .no-title-padding .mat-card-content{
+    padding: 0 0.5em 0.5em 0 !important;
+  }
+  

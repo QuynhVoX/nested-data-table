@@ -1,0 +1,29 @@
+[hidden]  { display: none; }
+.no-padding {
+    padding: 4px !important;
+  }
+  
+  mat-icon {
+    // color: #009cde;
+  
+    &.fa-plus-circle {
+      color: green;
+    }
+  
+    &.fa-times {
+      color: red;
+    }
+  }
+mat-form-field {padding: 10px 10px 0 10px;width: calc(50% - 20px);}
+.mat-header-row,
+.mat-row {
+  padding: 5px 0px 0px 5px !important;
+  min-height: 0px;
+}
+.no-title-padding .mat-card-content{
+  padding: 0 0.5em 0.5em 0 !important;
+}
+.mat-header-cell,
+.mat-cell {
+  padding: 0 0.2rem;
+}
